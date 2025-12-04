@@ -187,28 +187,6 @@ class InventorySystem:
         if len(self.recent_activity) > 10:
             self.recent_activity.pop()
 
-    def update_item(self, sku, new_name, new_category, new_price, new_stock):
-        item = self.get_item_by_sku(sku)
-        if item:
-            old_name = item.name
-            old_category = item.category
-
-            activity_text = f"Updated Item: {item.sku}"
-            
-            if old_name != new_name:
-                activity_text += f" (Name: {old_name} -> {new_name})"
-            
-            if old_category != new_category:
-                activity_text += f" (Category: {old_category} -> {new_category})"
-            
-            item.name = new_name
-            item.category = new_category
-            
-            self.log_activity(activity_text, "edit")
-            self.save_data()
-            return True
-        return False
-
 class InventoryApp(ctk.CTk):
     def __init__(self):
         super().__init__()
